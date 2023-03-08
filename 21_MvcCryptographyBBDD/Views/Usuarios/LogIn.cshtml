@@ -1,0 +1,22 @@
+﻿
+@model Usuario
+
+
+<h1 style="color:red">Log in User</h1>
+
+
+<form method="post">
+    <input type="text" name="email" class="form-control" placeholder="Email" />
+    <input type="text" name="password" class="form-control" placeholder="Password" />
+
+    <button type="submit" class="btn btn-info">Log in</button>
+</form>
+
+
+<h1 style="color:red">@ViewData["MENSAJE"]</h1>
+
+@if(Model != null) {
+    <h1>Bienvenido a tu pagina, @Model.Nombre</h1>
+    <h1 style="color:red">@Model.Email</h1>
+    <img src="@Model.Imagen"  style="width:200px"/>
+}
