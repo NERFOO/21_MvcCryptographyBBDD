@@ -65,18 +65,18 @@ namespace _21_MvcCryptographyBBDD.Helpers
         }
 
         //TENEMOS UN METODO PARA SUBIR LA IMAGEN DEL USUARIO A NUESTRO LOCAL
-        public enum Folders { Images = 0, Uploads = 1, Facturas = 2, Temporal = 3 }
-        public static string UploadImage(IFormFile file, Folders folder)
-        {
-            string fileName = file.FileName;
-            string path = this.helperPath.MapPath(fileName, folder);
+        //public enum Folders { Images = 0, Uploads = 1, Facturas = 2, Temporal = 3 }
+        //public static string UploadImage(IFormFile file, Folders folder)
+        //{
+        //    string fileName = file.FileName;
+        //    string path = this.helperPath.MapPath(fileName, folder);
 
-            using (Stream stream = new FileStream(path, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
-            return path;
-        }
+        //    using (Stream stream = new FileStream(path, FileMode.Create))
+        //    {
+        //        await file.CopyToAsync(stream);
+        //    }
+        //    return path;
+        //}
 
 
     }
