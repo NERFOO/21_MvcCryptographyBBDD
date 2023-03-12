@@ -23,9 +23,17 @@ namespace _21_MvcCryptographyBBDD.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Register(string nombre, string email, string password, string imagen)
+        public async Task<IActionResult> Register(string nombre, string email, string password, IFormFile imagen)
         {
-            await this.repo.RegisterUser(nombre, email, password, imagen);
+            var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
+            var path = Path.Combine("wwwroot","img", imagen.FileName);
+
+            using (Stream stream = new FileStream(path, FileMode.Create))
+            {
+                await imagen.CopyToAsync(stream);
+            }
+
+            await this.repo.RegisterUser(nombre, email, password, imagen.FileName);
 
             ViewData["MENSAJE"] = "Usuario registrado correctamente";
 
@@ -48,15 +56,6 @@ namespace _21_MvcCryptographyBBDD.Controllers
                 return View();
             } else
             {
-                //ViewData["Host"] = Request.Host;
-                //string rootPath = this.hostEnvironment.WebRootPath;
-                //string path = Path.Combine(rootPath, "img", user.Imagen);
-
-                //using (Stream stream = new FileStream(path, FileMode.Create))
-                //{
-                //    path.CopyTo(stream);
-                //}
-
                 return View(user);
             }
         }
