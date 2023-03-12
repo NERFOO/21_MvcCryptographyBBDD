@@ -26,9 +26,10 @@ namespace _21_MvcCryptographyBBDD.Controllers
         public async Task<IActionResult> Register(string nombre, string email, string password, IFormFile imagen)
         {
             var baseUrl = $"{Request.Scheme}://{Request.Host}{Request.PathBase}";
-            var path = Path.Combine("wwwroot","img", imagen.FileName);
+            var path = Path.Combine(baseUrl, imagen.FileName);
+            var path2 = Path.Combine("wwwroot","img", imagen.FileName);
 
-            using (Stream stream = new FileStream(path, FileMode.Create))
+            using (Stream stream = new FileStream(path2, FileMode.Create))
             {
                 await imagen.CopyToAsync(stream);
             }
