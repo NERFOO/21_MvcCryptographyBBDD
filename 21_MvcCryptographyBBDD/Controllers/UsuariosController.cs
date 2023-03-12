@@ -1,5 +1,6 @@
 ﻿using _21_MvcCryptographyBBDD.Models;
 using _21_MvcCryptographyBBDD.Repositories;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 
 namespace _21_MvcCryptographyBBDD.Controllers
@@ -8,10 +9,12 @@ namespace _21_MvcCryptographyBBDD.Controllers
     {
 
         private RepositoryUsuarios repo;
+        private IWebHostEnvironment hostEnvironment;
 
-        public UsuariosController(RepositoryUsuarios repo)
+        public UsuariosController(RepositoryUsuarios repo, IWebHostEnvironment hostEnvironment)
         {
             this.repo = repo;
+            this.hostEnvironment = hostEnvironment;
         }
 
         public IActionResult Register()
@@ -45,6 +48,15 @@ namespace _21_MvcCryptographyBBDD.Controllers
                 return View();
             } else
             {
+                //ViewData["Host"] = Request.Host;
+                //string rootPath = this.hostEnvironment.WebRootPath;
+                //string path = Path.Combine(rootPath, "img", user.Imagen);
+
+                //using (Stream stream = new FileStream(path, FileMode.Create))
+                //{
+                //    path.CopyTo(stream);
+                //}
+
                 return View(user);
             }
         }
